@@ -1,31 +1,127 @@
 ---
-title: "Quarto Document"
-author: "Roger Andre"
-toc: false
-format:
-  html:
-    code-fold: true
+title: "Hello World with R and Python"
+author: "Your Name"
+date: today
+format: html
+execute:
+  echo: true
+  warning: false
 ---
-### This is some markdown:
 
-* "Hello, world!"
+## Introduction
 
-### Below is some in-line Python code:
+This document demonstrates how to use both R and Python in the same Quarto document. We'll create simple "Hello World" examples and generate visualizations using both languages.
 
-`r ''````{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
+## R Section
 
+### Hello World in R
+
+```{r}
+# Hello World in R
+message("Hello World from R!")
+
+# Basic R operations
+x <- 1:10
+y <- x^2
+print(paste("We have", length(x), "data points"))
+```
+
+### R Visualization
+
+Let's create a simple scatter plot using R's built-in plotting capabilities:
+
+```{r}
+#| label: fig-r-plot
+#| fig-cap: "Quadratic relationship plotted with R"
+
+# Create a scatter plot
+plot(x, y, 
+     main = "Quadratic Relationship (R)",
+     xlab = "X values", 
+     ylab = "Y values (X²)",
+     pch = 16,
+     col = "blue",
+     cex = 1.2)
+
+# Add a line
+lines(x, y, col = "red", lwd = 2)
+```
+
+## Python Section
+
+### Hello World in Python
+
+```{python}
+# Hello World in Python
+print("Hello World from Python!")
+
+# Basic Python operations
 import numpy as np
 import matplotlib.pyplot as plt
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
+x_py = np.linspace(0, 10, 50)
+y_py = np.sin(x_py)
+print(f"We have {len(x_py)} data points")
+```
+
+### Python Visualization
+
+Now let's create a sine wave plot using matplotlib:
+
+```{python}
+#| label: fig-python-plot
+#| fig-cap: "Sine wave plotted with Python"
+
+# Create the plot
+plt.figure(figsize=(10, 6))
+plt.plot(x_py, y_py, 'g-', linewidth=2, label='sin(x)')
+plt.fill_between(x_py, y_py, alpha=0.3, color='green')
+plt.title('Sine Wave (Python)', fontsize=16)
+plt.xlabel('X values', fontsize=12)
+plt.ylabel('sin(X)', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.legend()
 plt.show()
 ```
+
+## Cross-Language Integration
+
+One of Quarto's powerful features is the ability to share data between R and Python. Here's an example:
+
+```{r}
+# Create data in R
+r_data <- data.frame(
+  category = c("A", "B", "C", "D"),
+  values = c(23, 45, 56, 78)
+)
+print(r_data)
+```
+
+```{python}
+# Access R data in Python
+import pandas as pd
+
+# R objects are available in Python via the 'r' object
+python_data = r.r_data
+print("Data from R, accessed in Python:")
+print(python_data)
+
+# Create a bar chart
+plt.figure(figsize=(8, 5))
+plt.bar(python_data['category'], python_data['values'], color='skyblue')
+plt.title('Bar Chart Created in Python with R Data')
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.show()
+```
+
+## Summary
+
+This document demonstrated:
+
+- Basic "Hello World" examples in both R and Python
+- Creating visualizations with R's base plotting system
+- Creating visualizations with Python's matplotlib
+- Sharing data between R and Python environments within Quarto
+
+Quarto makes it easy to combine multiple programming languages in a single document, making it perfect for data science workflows that leverage the strengths of different tools.
