@@ -85,37 +85,6 @@ plt.legend()
 plt.show()
 ```
 
-## Cross-Language Integration
-
-One of Quarto's powerful features is the ability to share data between R and Python. Here's an example:
-
-```{r}
-# Create data in R
-r_data <- data.frame(
-  category = c("A", "B", "C", "D"),
-  values = c(23, 45, 56, 78)
-)
-print(r_data)
-```
-
-```{python}
-# Access R data in Python
-import pandas as pd
-
-# R objects are available in Python via the 'r' object
-python_data = r.r_data
-print("Data from R, accessed in Python:")
-print(python_data)
-
-# Create a bar chart
-plt.figure(figsize=(8, 5))
-plt.bar(python_data['category'], python_data['values'], color='skyblue')
-plt.title('Bar Chart Created in Python with R Data')
-plt.xlabel('Categories')
-plt.ylabel('Values')
-plt.show()
-```
-
 ## Summary
 
 This document demonstrated:
@@ -123,6 +92,5 @@ This document demonstrated:
 - Basic "Hello World" examples in both R and Python
 - Creating visualizations with R's base plotting system
 - Creating visualizations with Python's matplotlib
-- Sharing data between R and Python environments within Quarto
 
 Quarto makes it easy to combine multiple programming languages in a single document, making it perfect for data science workflows that leverage the strengths of different tools.
